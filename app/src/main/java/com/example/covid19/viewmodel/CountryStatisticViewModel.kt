@@ -2,8 +2,8 @@ package com.example.covid19.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.covid19.http.Covid19ApiInterface
 import com.example.covid19.models.CountryStatistic
-import com.example.covid19.repositories.CountryRepository
 
 class CountryStatisticViewModel : ViewModel() {
     var countryStatisticList = ArrayList<CountryStatistic>()
@@ -11,10 +11,10 @@ class CountryStatisticViewModel : ViewModel() {
         MutableLiveData<List<CountryStatistic>>()
     }
 
-    init {
-        countryStatisticList = CountryRepository.getAllCountriStatisticList()
-        //fetch country statistic from
-        countryStatisticData.value = countryStatisticList
 
+    suspend fun getCountryStatistic(countryId: String): MutableLiveData<List<CountryStatistic>> {
+        countryStatisticList = Covid19ApiInterface.create().getCountryStatistic(countryId)
+        countryStatisticData.value = countryStatisticList
+        return countryStatisticData
     }
 }

@@ -9,10 +9,10 @@ import com.example.covid19.models.CountryStatistic
 
 
 class CountryStatisticRecycleViewAdapter(private val list: ArrayList<CountryStatistic>) :
-    RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
+        RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
 
     class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.country_statistic_row, parent, false)) {
+            RecyclerView.ViewHolder(inflater.inflate(R.layout.country_statistic_row, parent, false)) {
 
         private var mDateTextView: TextView? = null
         private var mConfirmedTextView: TextView? = null
@@ -35,16 +35,16 @@ class CountryStatisticRecycleViewAdapter(private val list: ArrayList<CountryStat
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+            parent: ViewGroup,
+            viewType: Int
     ): CountryStatisticViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return CountryStatisticViewHolder(inflater, parent)
     }
 
     override fun onBindViewHolder(
-        holder: CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder,
-        position: Int
+            holder: CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder,
+            position: Int
     ) {
         val countryStatistic: CountryStatistic = list[position]
         holder.bind(countryStatistic)

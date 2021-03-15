@@ -11,8 +11,9 @@ class CountryViewModel : ViewModel() {
         MutableLiveData<List<Country>>()
     }
 
-    init {
+    suspend fun getAllCountries(): MutableLiveData<List<Country>> {
         countries = CountryRepository.getAllCountries()
         countriesData.value = countries
+        return countriesData
     }
 }

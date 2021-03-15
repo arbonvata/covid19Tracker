@@ -11,8 +11,7 @@ class CountryRecycleViewAdapter(private val list: ArrayList<Country>) : Recycler
 
 
     class CountryViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-        : RecyclerView.ViewHolder(inflater.inflate(R.layout.country_name_and_code, parent, false))
-    {
+        : RecyclerView.ViewHolder(inflater.inflate(R.layout.country_name_and_code, parent, false)) {
         private var mCountryNameTv: TextView? = null
         private var mSluggCodeTv: TextView? = null
 
@@ -34,7 +33,7 @@ class CountryRecycleViewAdapter(private val list: ArrayList<Country>) : Recycler
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        val country : Country = list[position]
+        val country: Country = list[position]
         holder.bind(country)
     }
 
