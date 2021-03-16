@@ -9,6 +9,7 @@ import com.example.covid19.R
 import com.example.covid19.models.Country
 import com.example.covid19.recycleViews.CountryRecycleViewAdapter.CountryViewHolder
 
+
 class CountryRecycleViewAdapter(private val list: ArrayList<Country>,
                                 private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CountryViewHolder>() {
@@ -21,7 +22,7 @@ class CountryRecycleViewAdapter(private val list: ArrayList<Country>,
 
         init {
             mCountryNameTv = itemView.findViewById(R.id.countryName)
-            mSluggCodeTv = itemView.findViewById(R.id.countryId)
+            mSluggCodeTv = itemView.findViewById(R.id.countryStatisticRv)
             itemView.setOnClickListener(this)
         }
 

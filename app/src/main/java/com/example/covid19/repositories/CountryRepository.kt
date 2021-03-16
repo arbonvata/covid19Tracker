@@ -24,9 +24,9 @@ object CountryRepository {
 
     }
 
-    suspend fun getAllCountriStatisticList(): ArrayList<CountryStatistic> {
+    suspend fun getAllCountriStatisticList(countryId : String): ArrayList<CountryStatistic> {
         //ToDO: fetch all data from covid 19api
-        countryStatisticList = Covid19ApiInterface.getCountryStatistic("")!!
+        countryStatisticList = Covid19ApiInterface.getCountryStatistic(countryId)
 
         return countryStatisticList
     }

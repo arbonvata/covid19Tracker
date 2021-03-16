@@ -28,7 +28,7 @@ import kotlinx.coroutines.withContext
  * create an instance of this fragment.
  */
 class CountryListFragment : Fragment(), OnItemClickListener {
-    lateinit var countryModel : CountryViewModel
+    lateinit var countryViewModel : CountryViewModel
     lateinit var recycleView : RecyclerView
     lateinit var clickedListener: onClickedListener
 
@@ -48,11 +48,11 @@ class CountryListFragment : Fragment(), OnItemClickListener {
         recycleView = view.findViewById(R.id.countryListRv)
         recycleView.layoutManager = LinearLayoutManager(this.context)
 
-        countryModel = ViewModelProvider(activity!!).get(CountryViewModel::class.java)
+        countryViewModel = ViewModelProvider(activity!!).get(CountryViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
             val allCountries: MutableLiveData<List<Country>>
             withContext(IO) {
-                 allCountries = countryModel.getAllCountries()
+                 allCountries = countryViewModel.getAllCountries()
             }
             withContext(Main) {
                 val countries = allCountries.value

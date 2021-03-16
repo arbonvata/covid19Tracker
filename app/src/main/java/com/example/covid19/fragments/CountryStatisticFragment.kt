@@ -1,11 +1,25 @@
 package com.example.covid19.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 import com.example.covid19.R
+import com.example.covid19.models.CountryStatistic
+import com.example.covid19.recycleViews.CountryStatisticRecycleViewAdapter
+import com.example.covid19.recycleViews.DefaultItemDecorator
+import com.example.covid19.viewmodel.CountryStatisticViewModel
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,13 +33,14 @@ private const val ARG_PARAM1 = "param1"
  */
 class CountryStatisticFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var countryCode: String
+    lateinit var recycleView: RecyclerView
+    lateinit var countryStatisticViewModel: CountryStatisticViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            countryCode = it.getString(ARG_PARAM1).toString()
 
         }
     }
@@ -35,7 +50,31 @@ class CountryStatisticFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_country_statistic, container, false)
+        val view = inflater.inflate(R.layout.fragment_country_statistic, container, false)
+        recycleView = view.findViewById(R.id.countryStatisticRv)
+        //recycleView.layoutManager = LinearLayoutManager(this.context)
+        countryStatisticViewModel = ViewModelProvider(activity!!).get(CountryStatisticViewModel::class.java)
+        viewLifecycleOwner.lifecycleScope.launch {
+            val allData : MutableLiveData<List<CountryStatistic>>
+            withContext(IO) {
+                allData =  countryStatisticViewModel.getCountryStatistic(countryCode)
+            }
+            withContext(Main) {
+                val listWithCountryStatistic = allData.value
+                if (listWithCountryStatistic != null) {
+                    populateRecycleView(listWithCountryStatistic)
+                }
+            }
+
+        }
+        return view
+    }
+
+    private fun populateRecycleView(listWithCountryStatistic: List<CountryStatistic>) {
+        recycleView.addItemDecoration(DefaultItemDecorator(12, 62))
+        val recyclerViewAdapter : CountryStatisticRecycleViewAdapter = CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
+        recycleView.adapter = recyclerViewAdapter
+        
     }
 
     companion object {
@@ -43,8 +82,6 @@ class CountryStatisticFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
          * @return A new instance of fragment CountryStatisticFragment.
          */
         // TODO: Rename and change types and number of parameters

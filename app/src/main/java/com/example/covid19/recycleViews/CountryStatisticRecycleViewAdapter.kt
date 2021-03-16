@@ -8,7 +8,7 @@ import com.example.covid19.R
 import com.example.covid19.models.CountryStatistic
 
 
-class CountryStatisticRecycleViewAdapter(private val list: ArrayList<CountryStatistic>) :
+class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic>) :
         RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
 
     class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -27,10 +27,10 @@ class CountryStatisticRecycleViewAdapter(private val list: ArrayList<CountryStat
         }
 
         fun bind(countryStatistic: CountryStatistic) {
-            mDateTextView?.text = countryStatistic.date.toString()
-            mConfirmedTextView?.text = countryStatistic.confirmed.toString()
-            mRecoveredTextView?.text = countryStatistic.recovered.toString()
-            mDeathsTextView?.text = countryStatistic.deaths.toString()
+            mDateTextView?.text = countryStatistic.Date.toString()
+            mConfirmedTextView?.text = countryStatistic.Confirmed.toString()
+            mRecoveredTextView?.text = countryStatistic.Recovered.toString()
+            mDeathsTextView?.text = countryStatistic.Deaths.toString()
         }
     }
 

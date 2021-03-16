@@ -18,7 +18,7 @@ class CountryViewModel : ViewModel() {
     }
 
     suspend fun getAllCountries(): MutableLiveData<List<Country>> {
-
+        //todo: Replace with async and await. More readable
         val jobInfo = viewModelScope.launch {
             withContext(IO) {
                 countries = CountryRepository.getAllCountries()
