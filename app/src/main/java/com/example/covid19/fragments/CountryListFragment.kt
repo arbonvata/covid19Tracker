@@ -1,10 +1,10 @@
 package com.example.covid19.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.R
 import com.example.covid19.models.Country
 import com.example.covid19.recycleViews.CountryRecycleViewAdapter
-import com.example.covid19.recycleViews.CountryRecycleViewAdapter.*
+import com.example.covid19.recycleViews.CountryRecycleViewAdapter.OnItemClickListener
 import com.example.covid19.recycleViews.DefaultItemDecorator
 import com.example.covid19.viewmodel.CountryViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -28,16 +28,10 @@ import kotlinx.coroutines.withContext
  * create an instance of this fragment.
  */
 class CountryListFragment : Fragment(), OnItemClickListener {
-    lateinit var countryViewModel : CountryViewModel
-    lateinit var recycleView : RecyclerView
+    lateinit var countryViewModel: CountryViewModel
+    lateinit var recycleView: RecyclerView
     lateinit var clickedListener: onClickedListener
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,11 +46,11 @@ class CountryListFragment : Fragment(), OnItemClickListener {
         viewLifecycleOwner.lifecycleScope.launch {
             val allCountries: MutableLiveData<List<Country>>
             withContext(IO) {
-                 allCountries = countryViewModel.getAllCountries()
+                allCountries = countryViewModel.getAllCountries()
             }
             withContext(Main) {
                 val countries = allCountries.value
-                if(countries != null) {
+                if (countries != null) {
                     populateView(allCountries)
                     setListener(activity as onClickedListener)
                 }
@@ -73,7 +67,8 @@ class CountryListFragment : Fragment(), OnItemClickListener {
     private fun populateView(allCountries: MutableLiveData<List<Country>>) {
         val countryList = allCountries.value
         recycleView.addItemDecoration(DefaultItemDecorator(12, 62))
-        val recyclerViewAdapter :  CountryRecycleViewAdapter = CountryRecycleViewAdapter(countryList as ArrayList<Country>, this)
+        val recyclerViewAdapter: CountryRecycleViewAdapter =
+            CountryRecycleViewAdapter(countryList as ArrayList<Country>, this)
         recycleView.adapter = recyclerViewAdapter
 
     }
@@ -91,11 +86,12 @@ class CountryListFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(arg: String) {
-        if(clickedListener != null) {
+        if (clickedListener != null) {
             clickedListener.onItemClicked(arg)
         }
     }
 }
+
 interface onClickedListener {
     fun onItemClicked(arg: String)
 }

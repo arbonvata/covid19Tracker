@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), onClickedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //first time the app is launched
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             setCountryFragment()
         }
     }
@@ -28,12 +28,13 @@ class MainActivity : AppCompatActivity(), onClickedListener {
     }
 
     private fun changeFragment(arg: String) {
-        lateinit var nextFragment : Fragment
-        val currentFragment : Fragment? = supportFragmentManager.findFragmentById(R.id.fragment_container_view)
-        if(currentFragment != null && currentFragment is CountryListFragment) {
+        lateinit var nextFragment: Fragment
+        val currentFragment: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view)
+        if (currentFragment != null && currentFragment is CountryListFragment) {
             nextFragment = CountryStatisticFragment.newInstance(arg)
         } else {
-            nextFragment = CountryListFragment.newInstance() as CountryListFragment
+            nextFragment = CountryListFragment.newInstance()
 
         }
         supportFragmentManager.commit {

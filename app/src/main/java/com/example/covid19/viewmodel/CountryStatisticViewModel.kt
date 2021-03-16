@@ -7,7 +7,6 @@ import com.example.covid19.http.Covid19ApiInterface
 import com.example.covid19.models.CountryStatistic
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.IO_PARALLELISM_PROPERTY_NAME
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 

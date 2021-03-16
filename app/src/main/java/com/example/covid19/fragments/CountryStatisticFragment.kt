@@ -52,12 +52,13 @@ class CountryStatisticFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_country_statistic, container, false)
         recycleView = view.findViewById(R.id.countryStatisticRv)
-        //recycleView.layoutManager = LinearLayoutManager(this.context)
-        countryStatisticViewModel = ViewModelProvider(activity!!).get(CountryStatisticViewModel::class.java)
+        recycleView.layoutManager = LinearLayoutManager(this.context)
+        countryStatisticViewModel =
+            ViewModelProvider(activity!!).get(CountryStatisticViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
-            val allData : MutableLiveData<List<CountryStatistic>>
+            val allData: MutableLiveData<List<CountryStatistic>>
             withContext(IO) {
-                allData =  countryStatisticViewModel.getCountryStatistic(countryCode)
+                allData = countryStatisticViewModel.getCountryStatistic(countryCode)
             }
             withContext(Main) {
                 val listWithCountryStatistic = allData.value
@@ -72,9 +73,10 @@ class CountryStatisticFragment : Fragment() {
 
     private fun populateRecycleView(listWithCountryStatistic: List<CountryStatistic>) {
         recycleView.addItemDecoration(DefaultItemDecorator(12, 62))
-        val recyclerViewAdapter : CountryStatisticRecycleViewAdapter = CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
+        val recyclerViewAdapter: CountryStatisticRecycleViewAdapter =
+            CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
         recycleView.adapter = recyclerViewAdapter
-        
+
     }
 
     companion object {

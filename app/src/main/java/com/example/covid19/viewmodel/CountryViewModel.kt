@@ -7,7 +7,6 @@ import com.example.covid19.models.Country
 import com.example.covid19.repositories.CountryRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
