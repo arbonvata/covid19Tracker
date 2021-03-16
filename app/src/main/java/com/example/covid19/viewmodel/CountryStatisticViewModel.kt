@@ -13,7 +13,7 @@ class CountryStatisticViewModel : ViewModel() {
 
 
     suspend fun getCountryStatistic(countryId: String): MutableLiveData<List<CountryStatistic>> {
-        countryStatisticList = Covid19ApiInterface.create().getCountryStatistic(countryId)
+        countryStatisticList = Covid19ApiInterface.getCountryStatistic(countryId)
         countryStatisticData.value = countryStatisticList
         return countryStatisticData
     }

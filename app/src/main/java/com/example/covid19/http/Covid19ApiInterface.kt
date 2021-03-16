@@ -2,34 +2,29 @@ package com.example.covid19.http
 
 import com.example.covid19.models.Country
 import com.example.covid19.models.CountryStatistic
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import io.ktor.client.*
+import io.ktor.client.request.*
+
+
 // see https://developer.android.com/training/basics/network-ops/connecting
-interface Covid19ApiInterface {
-    @GET("countries")
-    suspend fun getCountryList() : ArrayList<Country>
+object Covid19ApiInterface {
 
-    @GET("country/{countryId}")
-    suspend fun getCountryStatistic(@Path("country") countryId : String) : ArrayList<CountryStatistic>
+    private val client = HttpClient()
+    private val gson = Gson()
 
-    companion object {
-        var BASE_URL : String ="https://covid19api.com/"
-        private val client = OkHttpClient.Builder().build()
-
-        fun create() : Covid19ApiInterface {
-
-            val retrofit = Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(BASE_URL)
-                    .client(client)
-                    .build()
-            return retrofit.create(Covid19ApiInterface::class.java)
-
-        }
+    suspend fun getCountryList(): ArrayList<Country> {
+        val response = client.get<String>("https://api.covid19api.com/countries")
+        val itemType = object : TypeToken<ArrayList<Country>>() {}.type
+        val countryList = gson.fromJson<ArrayList<Country>>(response, itemType)
+        return countryList
     }
 
+    suspend fun getCountryStatistic(countryId: String): ArrayList<CountryStatistic> {
+        val response = client.get<String>("https://api.covid19api.com/country/$countryId")
+        val itemType = object : TypeToken<ArrayList<CountryStatistic>>() {}.type
+        val countryStatisticList = gson.fromJson<ArrayList<CountryStatistic>>(response, itemType)
+        return countryStatisticList
+    }
 }

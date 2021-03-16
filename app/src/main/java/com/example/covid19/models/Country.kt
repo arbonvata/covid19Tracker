@@ -7,6 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.R
 
 
-data class Country(val country : String, val Slug : String, val ISO2 :String) {
+data class Country(val Country : String, val Slug : String, val ISO2 :String) {
 
 }
