@@ -23,7 +23,9 @@ class CountryViewModel : ViewModel() {
                 countries = CountryRepository.getAllCountries()
             }
             withContext(Main) {
-                countriesData.value = countries
+                //sort alfabetically
+                val countriesSorted = countries.sortedBy { it.Country}
+                countriesData.value = countriesSorted.toList()
 
             }
         }

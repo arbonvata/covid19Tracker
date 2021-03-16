@@ -27,10 +27,10 @@ class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic
         }
 
         fun bind(countryStatistic: CountryStatistic) {
-            mDateTextView?.text = countryStatistic.Date.toString()
-            mConfirmedTextView?.text = countryStatistic.Confirmed.toString()
-            mRecoveredTextView?.text = countryStatistic.Recovered.toString()
-            mDeathsTextView?.text = countryStatistic.Deaths.toString()
+            mDateTextView?.text = "Date ${countryStatistic.Date}"
+            mConfirmedTextView?.text = "Confirmed ${countryStatistic.Confirmed}"
+            mRecoveredTextView?.text = "Recovered ${countryStatistic.Recovered}"
+            mDeathsTextView?.text = "Number of deaths: ${countryStatistic.Deaths}"
         }
     }
 
