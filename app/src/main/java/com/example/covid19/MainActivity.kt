@@ -7,8 +7,9 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.covid19.fragments.CountryListFragment
 import com.example.covid19.fragments.CountryStatisticFragment
+import com.example.covid19.fragments.onClickedListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), onClickedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,18 +27,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeFragment() {
+    private fun changeFragment(arg: String) {
         lateinit var nextFragment : Fragment
         val currentFragment : Fragment? = supportFragmentManager.findFragmentById(R.id.fragment_container_view)
         if(currentFragment != null && currentFragment is CountryListFragment) {
-            nextFragment = CountryStatisticFragment.newInstance("aa", "b")
+            nextFragment = CountryStatisticFragment.newInstance(arg)
         } else {
-            nextFragment = CountryListFragment.newInstance("aa", "bb")
+            nextFragment = CountryListFragment.newInstance() as CountryListFragment
+
         }
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace(R.id.fragment_container_view, nextFragment)
             addToBackStack(null)
         }
+    }
+
+    override fun onItemClicked(arg: String) {
+        changeFragment(arg)
     }
 }
