@@ -42,6 +42,12 @@ class CountryListFragment : Fragment(), OnItemClickListener {
         recycleView = view.findViewById(R.id.countryListRv)
         recycleView.layoutManager = LinearLayoutManager(this.context)
 
+        initiateViewModel()
+
+        return view
+    }
+
+    private fun initiateViewModel() {
         countryViewModel = ViewModelProvider(activity!!).get(CountryViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
             val allCountries: MutableLiveData<List<Country>>
@@ -56,13 +62,9 @@ class CountryListFragment : Fragment(), OnItemClickListener {
                 }
             }
         }
-
-        return view
     }
 
-    fun setListener(onItemClickedListener: onClickedListener) {
-        this.clickedListener = onItemClickedListener
-    }
+
 
     private fun populateView(allCountries: MutableLiveData<List<Country>>) {
         val countryList = allCountries.value
@@ -71,6 +73,9 @@ class CountryListFragment : Fragment(), OnItemClickListener {
             CountryRecycleViewAdapter(countryList as ArrayList<Country>, this)
         recycleView.adapter = recyclerViewAdapter
 
+    }
+    fun setListener(onItemClickedListener: onClickedListener) {
+        this.clickedListener = onItemClickedListener
     }
 
     companion object {

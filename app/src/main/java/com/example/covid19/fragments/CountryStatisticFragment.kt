@@ -32,7 +32,6 @@ private const val ARG_PARAM1 = "param1"
  * create an instance of this fragment.
  */
 class CountryStatisticFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var countryCode: String
     lateinit var recycleView: RecyclerView
     lateinit var countryStatisticViewModel: CountryStatisticViewModel
@@ -53,6 +52,11 @@ class CountryStatisticFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_country_statistic, container, false)
         recycleView = view.findViewById(R.id.countryStatisticRv)
         recycleView.layoutManager = LinearLayoutManager(this.context)
+        initiateViewModel()
+        return view
+    }
+
+    private fun initiateViewModel() {
         countryStatisticViewModel =
             ViewModelProvider(activity!!).get(CountryStatisticViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
@@ -68,7 +72,6 @@ class CountryStatisticFragment : Fragment() {
             }
 
         }
-        return view
     }
 
     private fun populateRecycleView(listWithCountryStatistic: List<CountryStatistic>) {

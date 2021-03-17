@@ -1,5 +1,6 @@
 package com.example.covid19
 
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import androidx.fragment.app.commit
 import com.example.covid19.fragments.CountryListFragment
 import com.example.covid19.fragments.CountryStatisticFragment
 import com.example.covid19.fragments.onClickedListener
+
 
 class MainActivity : AppCompatActivity(), onClickedListener {
     override fun onCreate(savedInstanceState: Bundle?) {

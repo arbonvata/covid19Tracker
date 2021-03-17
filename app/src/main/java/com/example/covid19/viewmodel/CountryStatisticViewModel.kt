@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CountryStatisticViewModel : ViewModel() {
     var countryStatisticList = ArrayList<CountryStatistic>()
@@ -22,12 +24,14 @@ class CountryStatisticViewModel : ViewModel() {
         val launch = viewModelScope.launch {
             withContext(IO) {
                 countryStatisticList = Covid19ApiInterface.getCountryStatistic(countryId)
+                countryStatisticList = countryStatisticList.reversed() as ArrayList<CountryStatistic>
             }
             withContext(Main) {
                 countryStatisticData.value = countryStatisticList
             }
         }
         launch.join()
+
         return countryStatisticData
     }
 }
