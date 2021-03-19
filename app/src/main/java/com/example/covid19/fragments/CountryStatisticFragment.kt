@@ -10,16 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.covid19.R
 import com.example.covid19.models.CountryStatistic
 import com.example.covid19.recycleViews.CountryStatisticRecycleViewAdapter
 import com.example.covid19.recycleViews.DefaultItemDecorator
 import com.example.covid19.viewmodel.CountryStatisticViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,17 +55,16 @@ class CountryStatisticFragment : Fragment() {
     private fun initiateViewModel() {
         countryStatisticViewModel =
             ViewModelProvider(activity!!).get(CountryStatisticViewModel::class.java)
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
             val allData: MutableLiveData<List<CountryStatistic>>
-            withContext(IO) {
-                allData = countryStatisticViewModel.getCountryStatistic(countryCode)
+
+            allData = countryStatisticViewModel.getCountryStatistic(countryCode)
+
+            val listWithCountryStatistic = allData.value
+            if (listWithCountryStatistic != null) {
+                populateRecycleView(listWithCountryStatistic)
             }
-            withContext(Main) {
-                val listWithCountryStatistic = allData.value
-                if (listWithCountryStatistic != null) {
-                    populateRecycleView(listWithCountryStatistic)
-                }
-            }
+
 
         }
     }

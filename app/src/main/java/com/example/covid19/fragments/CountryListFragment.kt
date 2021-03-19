@@ -16,10 +16,7 @@ import com.example.covid19.recycleViews.CountryRecycleViewAdapter
 import com.example.covid19.recycleViews.CountryRecycleViewAdapter.OnItemClickListener
 import com.example.covid19.recycleViews.DefaultItemDecorator
 import com.example.covid19.viewmodel.CountryViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**
@@ -49,21 +46,18 @@ class CountryListFragment : Fragment(), OnItemClickListener {
 
     private fun initiateViewModel() {
         countryViewModel = ViewModelProvider(activity!!).get(CountryViewModel::class.java)
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
+
             val allCountries: MutableLiveData<List<Country>>
-            withContext(IO) {
-                allCountries = countryViewModel.getAllCountries()
-            }
-            withContext(Main) {
-                val countries = allCountries.value
-                if (countries != null) {
-                    populateView(allCountries)
-                    setListener(activity as onClickedListener)
-                }
+            allCountries = countryViewModel.getAllCountries()
+
+            val countries = allCountries.value
+            if (countries != null) {
+                populateView(allCountries)
+                setListener(activity as onClickedListener)
             }
         }
     }
-
 
 
     private fun populateView(allCountries: MutableLiveData<List<Country>>) {
@@ -74,6 +68,7 @@ class CountryListFragment : Fragment(), OnItemClickListener {
         recycleView.adapter = recyclerViewAdapter
 
     }
+
     fun setListener(onItemClickedListener: onClickedListener) {
         this.clickedListener = onItemClickedListener
     }
