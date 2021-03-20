@@ -17,7 +17,11 @@ class CountryStatisticViewModel : ViewModel() {
         //todo: Replace with async and await. More readable
         val launch = viewModelScope.launch {
             countryStatisticList = Covid19ApiInterface.getCountryStatistic(countryId)
-            countryStatisticList = countryStatisticList.reversed() as ArrayList<CountryStatistic>
+            //TODO: Check that countryStatisticList is not empty
+            if (!countryStatisticList.isEmpty()) {
+                countryStatisticList =
+                    countryStatisticList.reversed() as ArrayList<CountryStatistic>
+            }
             countryStatisticData.value = countryStatisticList
         }
         launch.join()

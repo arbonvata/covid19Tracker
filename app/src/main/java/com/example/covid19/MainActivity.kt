@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), onClickedListener {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add<CountryListFragment>(R.id.fragment_container_view)
-            addToBackStack(null)
+
         }
     }
 
@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity(), onClickedListener {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view)
         if (currentFragment != null && currentFragment is CountryListFragment) {
             nextFragment = CountryStatisticFragment.newInstance(arg)
+
         } else {
             nextFragment = CountryListFragment.newInstance()
+
 
         }
         supportFragmentManager.commit {
@@ -48,5 +50,15 @@ class MainActivity : AppCompatActivity(), onClickedListener {
 
     override fun onItemClicked(arg: String) {
         changeFragment(arg)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+            //this should not be needed, but pressing back one time, when being in fragmentB leads to a transition to same fragment, fragmentB
+            super.onBackPressed()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
