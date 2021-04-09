@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.covid19.models.Country
 import com.example.covid19.repositories.CountryRepository
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CountryViewModel : ViewModel() {
     var countries = ArrayList<Country>()
@@ -14,16 +17,14 @@ class CountryViewModel : ViewModel() {
     }
 
     suspend fun getAllCountries(): MutableLiveData<List<Country>> {
-        //todo: Replace with async and await. More readable
-        val jobInfo = viewModelScope.launch {
+
+
 
             countries = CountryRepository.getAllCountries()
             //sort alfabetically
             val countriesSorted = countries.sortedBy { it.Country }
             countriesData.value = countriesSorted.toList()
-        }
-        jobInfo.join()
-        return countriesData
+            return countriesData
     }
 
 }

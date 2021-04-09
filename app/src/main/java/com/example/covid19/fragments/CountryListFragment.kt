@@ -47,15 +47,10 @@ class CountryListFragment : Fragment(), OnItemClickListener {
     private fun initiateViewModel() {
         countryViewModel = ViewModelProvider(activity!!).get(CountryViewModel::class.java)
         lifecycleScope.launch {
-
             val allCountries: MutableLiveData<List<Country>>
-            allCountries = countryViewModel.getAllCountries()
-
-            val countries = allCountries.value
-            if (countries != null) {
-                populateView(allCountries)
-                setListener(activity as onClickedListener)
-            }
+            allCountries = countryViewModel.getAllCountries() //this will be suspended here.
+            populateView(allCountries)
+            setListener(activity as onClickedListener)
         }
     }
 
@@ -79,7 +74,6 @@ class CountryListFragment : Fragment(), OnItemClickListener {
          * this fragment using the provided parameters.
          * @return A new instance of fragment CountryListFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             CountryListFragment()

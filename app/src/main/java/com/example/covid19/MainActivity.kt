@@ -51,14 +51,4 @@ class MainActivity : AppCompatActivity(), onClickedListener {
     override fun onItemClicked(arg: String) {
         changeFragment(arg)
     }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStackImmediate()
-            //this should not be needed, but pressing back one time, when being in fragmentB leads to a transition to same fragment, fragmentB
-            super.onBackPressed()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }
