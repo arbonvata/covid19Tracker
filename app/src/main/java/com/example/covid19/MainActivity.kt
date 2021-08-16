@@ -16,8 +16,10 @@ class MainActivity : AppCompatActivity(), onClickedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //first time the app is launched
-        if (savedInstanceState == null) {
-            setCountryFragment()
+        when (savedInstanceState) {
+            null -> {
+                setCountryFragment()
+            }
         }
     }
 
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity(), onClickedListener {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add<CountryListFragment>(R.id.fragment_container_view)
-
         }
     }
 
@@ -33,16 +34,14 @@ class MainActivity : AppCompatActivity(), onClickedListener {
         lateinit var nextFragment: Fragment
         val currentFragment: Fragment? =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view)
-        if (currentFragment != null && currentFragment is CountryListFragment) {
-            nextFragment = CountryStatisticFragment.newInstance(arg)
+        nextFragment = if (currentFragment != null && currentFragment is CountryListFragment) {
+            CountryStatisticFragment.newInstance(arg)
 
         } else {
-            nextFragment = CountryListFragment.newInstance()
-
-
+            CountryListFragment.newInstance()
         }
         supportFragmentManager.commit {
-            setReorderingAllowed(true)
+            //setReorderingAllowed(true)
             replace(R.id.fragment_container_view, nextFragment)
             addToBackStack(null)
         }
@@ -50,5 +49,13 @@ class MainActivity : AppCompatActivity(), onClickedListener {
 
     override fun onItemClicked(arg: String) {
         changeFragment(arg)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
