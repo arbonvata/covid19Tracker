@@ -1,12 +1,10 @@
-package com.example.covid19.recycleViews
+package com.example.covid19.CountryStatistic
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.R
-import com.example.covid19.models.CountryStatistic
-
 
 class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic>) :
     RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {

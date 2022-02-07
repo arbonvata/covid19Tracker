@@ -1,6 +1,6 @@
-package com.example.covid19.models
+package com.example.covid19.CountryStatistic
 
-import java.util.*
+import java.util.Date
 
 data class CountryStatistic(
     val ID: String,
@@ -18,5 +18,4 @@ data class CountryStatistic(
     val Status: String,
     val Date: Date,
 
-
-    )
+)
