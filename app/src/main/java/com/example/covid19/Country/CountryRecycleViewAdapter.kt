@@ -1,10 +1,14 @@
 package com.example.covid19.Country
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.covid19.Country.CountryRecycleViewAdapter.CountryViewHolder
 import com.example.covid19.R
 
@@ -15,19 +19,22 @@ class CountryRecycleViewAdapter(
 
     inner class CountryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.country_name_and_code, parent, false)),
-        View.OnClickListener {
-        private var mCountryNameTv: TextView? = null
-        private var mSluggCodeTv: TextView? = null
+        OnClickListener {
+        var context: Context = parent.context
+        private var countryNameTv: TextView = itemView.findViewById(R.id.countryName)
+        private var sluggCodeTv: TextView = itemView.findViewById(R.id.countrySluggCodeTv)
+        private var flagIcon: ImageView = itemView.findViewById(R.id.flag)
 
         init {
-            mCountryNameTv = itemView.findViewById(R.id.countryName)
-            mSluggCodeTv = itemView.findViewById(R.id.countrySluggCodeTv)
             itemView.setOnClickListener(this)
         }
 
         fun bind(country: Country) {
-            mCountryNameTv?.text = country.Country
-            mSluggCodeTv?.text = country.Slug
+            countryNameTv?.text = country.Country
+            sluggCodeTv?.text = country.Slug
+            var url = "https://flagcdn.com/72x54/" + country.ISO2.lowercase() + ".webp"
+            // Todo: a better solution is to download all flags into a database and cache them
+            Glide.with(context).load(url).into(flagIcon!!)
         }
 
         override fun onClick(v: View?) {
