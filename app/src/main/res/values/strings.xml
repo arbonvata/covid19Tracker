@@ -5,4 +5,16 @@
     <string name="no_internet_connection">no internet connection</string>
     <string name="no_internet">\"No internet \"</string>
     <string name="country_code">Country code</string>
+    <string name="action_settings">Settings</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="show_as_chart">Show as chart</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="only_chart_title">Show data as chart</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

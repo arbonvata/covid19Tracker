@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.R
+import com.example.covid19.databinding.FragmentCountryStatisticBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
 
 /**
@@ -22,6 +23,7 @@ class CountryStatisticFragment : Fragment() {
     lateinit var recycleView: RecyclerView
     lateinit var countryStatisticViewModel: CountryStatisticViewModel
     private val args: CountryStatisticFragmentArgs by navArgs()
+    private lateinit var binding :FragmentCountryStatisticBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +35,9 @@ class CountryStatisticFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_country_statistic, container, false)
-        recycleView = view.findViewById(R.id.countryStatisticRv)
+        binding = FragmentCountryStatisticBinding.inflate(inflater)
+        recycleView = binding.countryStatisticRv
+        val view = binding.root
         recycleView.layoutManager = LinearLayoutManager(this.context)
         initiateViewModel()
         countryStatisticViewModel.countryStatisticData.observe(requireActivity()) {

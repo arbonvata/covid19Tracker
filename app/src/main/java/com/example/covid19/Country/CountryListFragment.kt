@@ -15,20 +15,25 @@ import com.example.covid19.Country.Country
 import com.example.covid19.Country.CountryRecycleViewAdapter
 import com.example.covid19.Country.CountryViewModel
 import com.example.covid19.R
+import com.example.covid19.databinding.CountryNameAndCodeBinding
+import com.example.covid19.databinding.FragmentCountryListBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
 
 class CountryListFragment : Fragment() {
-    lateinit var countryViewModel: CountryViewModel
-    lateinit var recycleView: RecyclerView
+    private lateinit var countryViewModel: CountryViewModel
+    private lateinit var recycleView: RecyclerView
+    private lateinit var binding:  FragmentCountryListBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        var view: View = inflater.inflate(R.layout.fragment_country_list, container, false)
-        recycleView = view.findViewById(R.id.countryListRv)
+        binding = FragmentCountryListBinding.inflate(inflater)
+        val view = binding.root
+        recycleView = binding.countryListRv
+
         recycleView.layoutManager = LinearLayoutManager(this.context)
         countryViewModel = ViewModelProvider(requireActivity()).get(CountryViewModel::class.java)
 
