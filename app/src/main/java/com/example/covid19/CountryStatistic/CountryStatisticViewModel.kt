@@ -7,11 +7,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class CountryStatisticViewModel : ViewModel() {
-    private var countryStatisticList = ArrayList<CountryStatistic>()
-    private val _countryStatisticData: MutableLiveData<List<CountryStatistic>> by lazy {
-        MutableLiveData<List<CountryStatistic>>()
+    private var countryStatisticList = ArrayList<CountryStatisticData>()
+    private val _countryStatisticData: MutableLiveData<List<CountryStatisticData>> by lazy {
+        MutableLiveData<List<CountryStatisticData>>()
     }
-    val countryStatisticData: LiveData<List<CountryStatistic>> = _countryStatisticData
+    val countryStatisticData: LiveData<List<CountryStatisticData>> = _countryStatisticData
 
     fun getCountryStatistic(countryId: String) {
         // todo: Replace with async and await. More readable
@@ -20,7 +20,7 @@ class CountryStatisticViewModel : ViewModel() {
             // TODO: Check that countryStatisticList is not empty
             if (!countryStatisticList.isEmpty()) {
                 countryStatisticList =
-                    countryStatisticList.reversed() as ArrayList<CountryStatistic>
+                    countryStatisticList.reversed() as ArrayList<CountryStatisticData>
             }
             _countryStatisticData.value = countryStatisticList
         }

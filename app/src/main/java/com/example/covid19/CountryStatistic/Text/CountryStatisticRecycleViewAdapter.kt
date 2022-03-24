@@ -1,12 +1,13 @@
-package com.example.covid19.CountryStatistic
+package com.example.covid19.CountryStatistic.Text
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.covid19.CountryStatistic.CountryStatisticData
 import com.example.covid19.R
 
-class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic>) :
+class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatisticData>) :
     RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
 
     class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -24,7 +25,7 @@ class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic
             mDeathsTextView = itemView.findViewById(R.id.deaths)
         }
 
-        fun bind(countryStatistic: CountryStatistic) {
+        fun bind(countryStatistic: CountryStatisticData) {
             mDateTextView?.text = "Date ${countryStatistic.Date}"
             mConfirmedTextView?.text = "Confirmed ${countryStatistic.Confirmed}"
             mRecoveredTextView?.text = "Recovered ${countryStatistic.Recovered}"
@@ -44,7 +45,7 @@ class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic
         holder: CountryStatisticViewHolder,
         position: Int
     ) {
-        val countryStatistic: CountryStatistic = list[position]
+        val countryStatistic: CountryStatisticData = list[position]
         holder.bind(countryStatistic)
     }
 

@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic
+package com.example.covid19.CountryStatistic.Text
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.covid19.CountryStatistic.CountryStatisticData
+import com.example.covid19.CountryStatistic.CountryStatisticViewModel
 import com.example.covid19.R
 import com.example.covid19.databinding.FragmentCountryStatisticBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
-import io.ktor.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -25,7 +26,7 @@ class CountryStatisticFragment : Fragment() {
     lateinit var recycleView: RecyclerView
     lateinit var countryStatisticViewModel: CountryStatisticViewModel
     private val args: CountryStatisticFragmentArgs by navArgs()
-    private lateinit var binding :FragmentCountryStatisticBinding
+    private lateinit var binding: FragmentCountryStatisticBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +56,10 @@ class CountryStatisticFragment : Fragment() {
     private fun observeStatisticData() {
         countryStatisticViewModel.countryStatisticData.observe(requireActivity()) {
             it?.let {
-                //Not all countries reports their covid19
+                // Not all countries reports their covid19
                 if (it.isNotEmpty()) {
                     populateRecycleView(it)
+                    // For those countries without any statistic show an informative textview
                 } else {
                     binding.textView.visibility = View.VISIBLE
                     binding.countryStatisticRv.visibility = View.GONE
@@ -73,7 +75,7 @@ class CountryStatisticFragment : Fragment() {
         countryStatisticViewModel.getCountryStatistic(countryCode)
     }
 
-    private fun populateRecycleView(listWithCountryStatistic: List<CountryStatistic>) {
+    private fun populateRecycleView(listWithCountryStatistic: List<CountryStatisticData>) {
         val recyclerViewAdapter =
             CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
         recycleView.apply {

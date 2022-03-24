@@ -30,11 +30,11 @@ class CountryRecycleViewAdapter(
         }
 
         fun bind(country: Country) {
-            countryNameTv?.text = country.Country
-            sluggCodeTv?.text = country.Slug
+            countryNameTv.text = country.Country
+            sluggCodeTv.text = country.Slug
             var url = "https://flagcdn.com/72x54/" + country.ISO2.lowercase() + ".webp"
             // Todo: a better solution is to download all flags into a database and cache them
-            Glide.with(context).load(url).into(flagIcon!!)
+            Glide.with(context).load(url).into(flagIcon)
         }
 
         override fun onClick(v: View?) {

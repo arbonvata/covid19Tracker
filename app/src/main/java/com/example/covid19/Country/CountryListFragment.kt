@@ -14,16 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.Country.Country
 import com.example.covid19.Country.CountryRecycleViewAdapter
 import com.example.covid19.Country.CountryViewModel
-import com.example.covid19.R
-import com.example.covid19.databinding.CountryNameAndCodeBinding
 import com.example.covid19.databinding.FragmentCountryListBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
 
 class CountryListFragment : Fragment() {
     private lateinit var countryViewModel: CountryViewModel
     private lateinit var recycleView: RecyclerView
-    private lateinit var binding:  FragmentCountryListBinding
-
+    private lateinit var binding: FragmentCountryListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

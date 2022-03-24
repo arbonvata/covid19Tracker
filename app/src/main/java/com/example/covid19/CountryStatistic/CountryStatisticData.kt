@@ -2,7 +2,7 @@ package com.example.covid19.CountryStatistic
 
 import java.util.Date
 
-data class CountryStatistic(
+data class CountryStatisticData(
     val ID: String,
     val Country: String,
     val CountryCode: String,

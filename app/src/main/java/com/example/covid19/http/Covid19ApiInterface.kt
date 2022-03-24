@@ -1,7 +1,7 @@
 package com.example.covid19.http
 
 import com.example.covid19.Country.Country
-import com.example.covid19.CountryStatistic.CountryStatistic
+import com.example.covid19.CountryStatistic.CountryStatisticData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.ktor.client.HttpClient
@@ -19,9 +19,9 @@ object Covid19ApiInterface {
         return gson.fromJson(response, itemType)
     }
 
-    suspend fun getCountryStatistic(countryId: String): ArrayList<CountryStatistic> {
+    suspend fun getCountryStatistic(countryId: String): ArrayList<CountryStatisticData> {
         val response = client.get<String>("https://api.covid19api.com/country/$countryId")
-        val itemType = object : TypeToken<ArrayList<CountryStatistic>>() {}.type
+        val itemType = object : TypeToken<ArrayList<CountryStatisticData>>() {}.type
         return gson.fromJson(response, itemType)
     }
 }
