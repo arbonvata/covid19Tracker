@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.R
 import com.example.covid19.databinding.FragmentCountryStatisticBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
+import io.ktor.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +30,7 @@ class CountryStatisticFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         countryCode = args.countryId
+        activity?.title = countryCode.uppercase()
     }
 
     override fun onCreateView(
@@ -35,17 +38,33 @@ class CountryStatisticFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = initUI(inflater)
+        initiateViewModel()
+        observeStatisticData()
+        return view
+    }
+
+    private fun initUI(inflater: LayoutInflater): LinearLayout {
         binding = FragmentCountryStatisticBinding.inflate(inflater)
         recycleView = binding.countryStatisticRv
         val view = binding.root
         recycleView.layoutManager = LinearLayoutManager(this.context)
-        initiateViewModel()
+        return view
+    }
+
+    private fun observeStatisticData() {
         countryStatisticViewModel.countryStatisticData.observe(requireActivity()) {
             it?.let {
-                populateRecycleView(it)
+                //Not all countries reports their covid19
+                if (it.isNotEmpty()) {
+                    populateRecycleView(it)
+                } else {
+                    binding.textView.visibility = View.VISIBLE
+                    binding.countryStatisticRv.visibility = View.GONE
+                    binding.textView.text = context?.getString(R.string.no_statistic_for_this_country)
+                }
             }
         }
-        return view
     }
 
     private fun initiateViewModel() {

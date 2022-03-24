@@ -36,8 +36,9 @@ class CountryListFragment : Fragment() {
 
         recycleView.layoutManager = LinearLayoutManager(this.context)
         countryViewModel = ViewModelProvider(requireActivity()).get(CountryViewModel::class.java)
+        activity?.title = "List with countries"
 
-        countryViewModel.countriesData.observe(requireActivity()) { it ->
+        countryViewModel.countriesData.observe(requireActivity()) {
             val recyclerViewAdapter =
                 CountryRecycleViewAdapter(it as ArrayList<Country>) { countryCode: String ->
                     // val directions = CountryListFragmentDirections.actionGoToStatisticFragment(countryCode)
