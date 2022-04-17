@@ -4,25 +4,28 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.covid19.CountryStatistic.CountryStatisticRepository.countryStatisticList
 import kotlinx.coroutines.launch
 
 class CountryStatisticViewModel : ViewModel() {
-    private var countryStatisticList = ArrayList<CountryStatisticData>()
-    private val _countryStatisticData: MutableLiveData<List<CountryStatisticData>> by lazy {
-        MutableLiveData<List<CountryStatisticData>>()
+    private lateinit var statisticData: CountryStatisticData
+    private val _countryStatisticData: MutableLiveData<CountryStatisticData> by lazy {
+        MutableLiveData<CountryStatisticData>()
     }
-    val countryStatisticData: LiveData<List<CountryStatisticData>> = _countryStatisticData
+    val countryStatisticData: LiveData<CountryStatisticData> = _countryStatisticData
 
     fun getCountryStatistic(countryId: String) {
         // todo: Replace with async and await. More readable
         viewModelScope.launch {
-            countryStatisticList = CountryStatisticRepository.countryStatisticList(countryId)
-            // TODO: Check that countryStatisticList is not empty
-            if (!countryStatisticList.isEmpty()) {
-                countryStatisticList =
-                    countryStatisticList.reversed() as ArrayList<CountryStatisticData>
+            statisticData = countryStatisticList(countryId)
+            val list = statisticData.data?.timeline
+            if (list != null) {
+                if (list.isNotEmpty()) {
+
+                        list.reversed()
+                }
             }
-            _countryStatisticData.value = countryStatisticList
+            _countryStatisticData.value = statisticData
         }
     }
 }

@@ -5,31 +5,34 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.CountryStatistic.CountryStatisticData
+import com.example.covid19.CountryStatistic.Timeline
 import com.example.covid19.R
 
-class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatisticData>) :
+class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData) :
     RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
+    private val list: ArrayList<Timeline>? = data.data?.timeline
 
     class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.country_statistic_row, parent, false)) {
 
-        private var mDateTextView: TextView? = null
-        private var mConfirmedTextView: TextView? = null
-        private var mRecoveredTextView: TextView? = null
-        private var mDeathsTextView: TextView? = null
+
+        private var dateTextView: TextView? = null
+        private var confirmedTextView: TextView? = null
+        private var recoveredTextView: TextView? = null
+        private var deathsTextView: TextView? = null
 
         init {
-            mDateTextView = itemView.findViewById(R.id.dateView)
-            mConfirmedTextView = itemView.findViewById(R.id.confirmedView)
-            mRecoveredTextView = itemView.findViewById(R.id.recovered)
-            mDeathsTextView = itemView.findViewById(R.id.deaths)
+            dateTextView = itemView.findViewById(R.id.dateView)
+            confirmedTextView = itemView.findViewById(R.id.confirmedView)
+            recoveredTextView = itemView.findViewById(R.id.recovered)
+            deathsTextView = itemView.findViewById(R.id.deaths)
         }
 
-        fun bind(countryStatistic: CountryStatisticData) {
-            mDateTextView?.text = "Date ${countryStatistic.Date}"
-            mConfirmedTextView?.text = "Confirmed ${countryStatistic.Confirmed}"
-            mRecoveredTextView?.text = "Recovered ${countryStatistic.Recovered}"
-            mDeathsTextView?.text = "Number of deaths: ${countryStatistic.Deaths}"
+        fun bind(countryStatistic: Timeline) {
+            dateTextView?.text = "Date ${countryStatistic.date}"
+            confirmedTextView?.text = "Confirmed ${countryStatistic.confirmed}"
+            recoveredTextView?.text = "Recovered ${countryStatistic.recovered}"
+            deathsTextView?.text = "Number of deaths: ${countryStatistic.recovered}"
         }
     }
 
@@ -45,11 +48,11 @@ class CountryStatisticRecycleViewAdapter(private val list: List<CountryStatistic
         holder: CountryStatisticViewHolder,
         position: Int
     ) {
-        val countryStatistic: CountryStatisticData = list[position]
-        holder.bind(countryStatistic)
+        val countryStatistic = list?.get(position)
+        countryStatistic?.let { holder.bind(it) }
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list?.size ?: 0
     }
 }

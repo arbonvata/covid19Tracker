@@ -25,11 +25,12 @@ object Covid19ApiInterface {
         return gson.fromJson(response.body<String>(), itemType)
     }
 
-    suspend fun getCountryStatistic(countryId: String): ArrayList<CountryStatisticData> {
-        val response = client.request("https://api.covid19api.com/country/$countryId") {
+    suspend fun getCountryStatistic(countryId: String): CountryStatisticData {
+        // "https://api.covid19api.com/country/$countryId"
+        val response = client.request("https://corona-api.com/countries/$countryId") {
             method = HttpMethod.Get
         }
-        val itemType = object : TypeToken<ArrayList<CountryStatisticData>>() {}.type
+        val itemType = object : TypeToken<CountryStatisticData>() {}.type
         return gson.fromJson(response.bodyAsText(), itemType)
     }
 }

@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 object CountryStatisticRepository {
-    suspend fun countryStatisticList(countryId: String): ArrayList<CountryStatisticData> {
+    suspend fun countryStatisticList(countryId: String): CountryStatisticData {
         return withContext(Dispatchers.IO) {
             Covid19ApiInterface.getCountryStatistic(countryId)
         }

@@ -32,7 +32,7 @@ class CountryRecycleViewAdapter(
         fun bind(country: Country) {
             countryNameTv.text = country.Country
             sluggCodeTv.text = country.Slug
-            var url = "https://flagcdn.com/72x54/" + country.ISO2.lowercase() + ".webp"
+            var url = "https://flagcdn.com/72x54/${country.ISO2.lowercase()}.webp"
             // Todo: a better solution is to download all flags into a database and cache them
             Glide.with(context).load(url).into(flagIcon)
         }
@@ -41,7 +41,7 @@ class CountryRecycleViewAdapter(
             val position: Int = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val item = countryList[position]
-                callBack(item.Slug)
+                callBack(item.ISO2)
             }
         }
     }

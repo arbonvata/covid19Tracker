@@ -38,7 +38,7 @@ class CountryStatisticFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = initUI(inflater)
         initiateViewModel()
         observeStatisticData()
@@ -57,7 +57,7 @@ class CountryStatisticFragment : Fragment() {
         countryStatisticViewModel.countryStatisticData.observe(requireActivity()) {
             it?.let {
                 // Not all countries reports their covid19
-                if (it.isNotEmpty()) {
+                if (it.data?.timeline?.isNotEmpty() == true) {
                     populateRecycleView(it)
                     // For those countries without any statistic show an informative textview
                 } else {
@@ -75,7 +75,7 @@ class CountryStatisticFragment : Fragment() {
         countryStatisticViewModel.getCountryStatistic(countryCode)
     }
 
-    private fun populateRecycleView(listWithCountryStatistic: List<CountryStatisticData>) {
+    private fun populateRecycleView(listWithCountryStatistic: CountryStatisticData) {
         val recyclerViewAdapter =
             CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
         recycleView.apply {
