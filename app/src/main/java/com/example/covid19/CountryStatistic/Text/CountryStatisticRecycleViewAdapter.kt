@@ -15,7 +15,6 @@ class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData)
     class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.country_statistic_row, parent, false)) {
 
-
         private var dateTextView: TextView? = null
         private var confirmedTextView: TextView? = null
         private var recoveredTextView: TextView? = null

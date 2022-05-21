@@ -22,7 +22,7 @@ class CountryStatisticViewModel : ViewModel() {
             if (list != null) {
                 if (list.isNotEmpty()) {
 
-                        list.reversed()
+                    list.reversed()
                 }
             }
             _countryStatisticData.value = statisticData

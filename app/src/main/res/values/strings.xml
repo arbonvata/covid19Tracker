@@ -18,4 +18,5 @@
     <string name="only_chart_title">Show data as chart</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="no_statistic_for_this_country">This country doesn\'t report any cases, and therefore no statistic is present</string>
+    <string name="list_with_countries">List with countries</string>
 </resources>
