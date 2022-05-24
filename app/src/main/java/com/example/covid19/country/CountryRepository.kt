@@ -1,4 +1,4 @@
-package com.example.covid19.Country
+package com.example.covid19.country
 
 import android.content.Context
 import com.example.covid19.R

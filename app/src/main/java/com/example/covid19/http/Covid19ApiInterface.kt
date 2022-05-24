@@ -1,7 +1,7 @@
 package com.example.covid19.http
 
-import com.example.covid19.Country.Country
-import com.example.covid19.CountryStatistic.CountryStatisticData
+import com.example.covid19.country.Country
+import com.example.covid19.countryStatistic.CountryStatisticData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.ktor.client.HttpClient

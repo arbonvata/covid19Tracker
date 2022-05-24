@@ -1,4 +1,4 @@
-package com.example.covid19.Country
+package com.example.covid19.country
 
 import android.app.Application
 import android.widget.Toast

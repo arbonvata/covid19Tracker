@@ -1,10 +1,10 @@
-package com.example.covid19.CountryStatistic
+package com.example.covid19.countryStatistic
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.covid19.CountryStatistic.CountryStatisticRepository.countryStatisticList
+import com.example.covid19.countryStatistic.CountryStatisticRepository.countryStatisticList
 import kotlinx.coroutines.launch
 
 class CountryStatisticViewModel : ViewModel() {

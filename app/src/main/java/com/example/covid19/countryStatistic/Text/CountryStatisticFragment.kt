@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic.Text
+package com.example.covid19.countryStatistic.Text
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid19.CountryStatistic.CountryStatisticData
-import com.example.covid19.CountryStatistic.CountryStatisticViewModel
 import com.example.covid19.R
+import com.example.covid19.countryStatistic.CountryStatisticData
+import com.example.covid19.countryStatistic.CountryStatisticViewModel
 import com.example.covid19.databinding.FragmentCountryStatisticBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
 

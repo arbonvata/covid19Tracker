@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/statisticFragment"
         android:label="Statistic for each country"
-        android:name="com.example.covid19.CountryStatistic.Text.CountryStatisticFragment"
+        android:name="com.example.covid19.countryStatistic.Text.CountryStatisticFragment"
         tools:layout="@layout/fragment_country_statistic"
         >
         <argument

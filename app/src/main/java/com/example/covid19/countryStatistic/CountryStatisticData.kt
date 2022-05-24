@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic
+package com.example.covid19.countryStatistic
 
 import com.google.gson.annotations.SerializedName
 /*

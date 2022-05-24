@@ -9,14 +9,12 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid19.Country.Country
-import com.example.covid19.Country.CountryRecycleViewAdapter
-import com.example.covid19.Country.CountryViewModel
 import com.example.covid19.R
+import com.example.covid19.country.Country
+import com.example.covid19.country.CountryRecycleViewAdapter
+import com.example.covid19.country.CountryViewModel
 import com.example.covid19.databinding.FragmentCountryListBinding
 import com.example.covid19.recycleViews.DefaultItemDecorator
 

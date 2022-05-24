@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic.Chart
+package com.example.covid19.countryStatistic.Chart
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic
+package com.example.covid19.countryStatistic
 
 import com.example.covid19.http.Covid19ApiInterface
 import kotlinx.coroutines.Dispatchers

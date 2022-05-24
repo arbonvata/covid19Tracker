@@ -1,4 +1,4 @@
-package com.example.covid19.CountryStatistic.Text
+package com.example.covid19.countryStatistic.Text
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid19.CountryStatistic.CountryStatisticData
-import com.example.covid19.CountryStatistic.Timeline
 import com.example.covid19.R
+import com.example.covid19.countryStatistic.CountryStatisticData
+import com.example.covid19.countryStatistic.Timeline
 
 class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData) :
     RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>(), Filterable {
