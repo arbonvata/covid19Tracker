@@ -2,38 +2,44 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/countryListFragment"
-    android:id="@+id/nav_graph.xml">
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/countryListFragment">
     <fragment
         android:id="@+id/countryListFragment"
         android:name="com.example.covid19.fragments.CountryListFragment"
         android:label="List with all countries"
-        tools:layout="@layout/fragment_country_list"
-        >
+        tools:layout="@layout/fragment_country_list">
         <action
             android:id="@+id/action_go_to_statistic_fragment"
-            app:destination="@+id/statisticFragment">
-        </action>
+            app:destination="@+id/statisticFragment" />
+        <action
+            android:id="@+id/action_go_to_summary_fragment"
+            app:destination="@+id/summaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.covid19.SettingsFragment"
-        android:label="Settings">
-    </fragment>
+        android:label="Settings" />
 
     <fragment
         android:id="@+id/statisticFragment"
-        android:label="Statistic for each country"
         android:name="com.example.covid19.countryStatistic.Text.CountryStatisticFragment"
-        tools:layout="@layout/fragment_country_statistic"
-        >
+        android:label="Statistic for each country"
+        tools:layout="@layout/fragment_country_statistic">
         <argument
             android:name="countryId"
-            app:argType="string"
-            >
-        </argument>
+            app:argType="string" />
 
     </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="com.example.covid19.countrySummary.CountrySummaryFragment"
+        android:label="Statistic for each country"
+        tools:layout="@layout/fragment_summary">
+        <argument
+            android:name="countryId"
+            app:argType="string" />
 
+    </fragment>
 
 </navigation>
