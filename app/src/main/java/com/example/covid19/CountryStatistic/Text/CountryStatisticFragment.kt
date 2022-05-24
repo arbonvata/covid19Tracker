@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -18,15 +19,15 @@ import com.example.covid19.recycleViews.DefaultItemDecorator
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CountryStatisticFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class CountryStatisticFragment : Fragment() {
     private lateinit var countryCode: String
-    lateinit var recycleView: RecyclerView
-    lateinit var countryStatisticViewModel: CountryStatisticViewModel
+    private lateinit var recycleView: RecyclerView
+    private lateinit var countryStatisticViewModel: CountryStatisticViewModel
     private val args: CountryStatisticFragmentArgs by navArgs()
     private lateinit var binding: FragmentCountryStatisticBinding
+    private lateinit var recyclerViewAdapter: CountryStatisticRecycleViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +42,21 @@ class CountryStatisticFragment : Fragment() {
     ): View {
         val view = initUI(inflater)
         initiateViewModel()
+        registerSearchAction()
         observeStatisticData()
         return view
+    }
+
+    private fun registerSearchAction() {
+        binding.countrySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                recyclerViewAdapter.filter.filter(newText.toString())
+                return false
+            }
+        })
     }
 
     private fun initUI(inflater: LayoutInflater): LinearLayout {
@@ -76,7 +90,7 @@ class CountryStatisticFragment : Fragment() {
     }
 
     private fun populateRecycleView(listWithCountryStatistic: CountryStatisticData) {
-        val recyclerViewAdapter =
+        recyclerViewAdapter =
             CountryStatisticRecycleViewAdapter(listWithCountryStatistic)
         recycleView.apply {
             addItemDecoration(DefaultItemDecorator(12, 62))

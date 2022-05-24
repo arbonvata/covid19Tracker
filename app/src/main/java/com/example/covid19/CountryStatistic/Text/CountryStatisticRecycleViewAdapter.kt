@@ -2,6 +2,8 @@ package com.example.covid19.CountryStatistic.Text
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19.CountryStatistic.CountryStatisticData
@@ -9,10 +11,11 @@ import com.example.covid19.CountryStatistic.Timeline
 import com.example.covid19.R
 
 class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData) :
-    RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>() {
+    RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>(), Filterable {
     private val list: ArrayList<Timeline>? = data.data?.timeline
+    var filterData = list
 
-    class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    inner class CountryStatisticViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.country_statistic_row, parent, false)) {
 
         private var dateTextView: TextView? = null
@@ -47,11 +50,38 @@ class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData)
         holder: CountryStatisticViewHolder,
         position: Int
     ) {
-        val countryStatistic = list?.get(position)
+        val countryStatistic = filterData?.get(position)
         countryStatistic?.let { holder.bind(it) }
     }
 
     override fun getItemCount(): Int {
-        return list?.size ?: 0
+        return filterData?.size ?: 0
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                filterData = if (charSearch.isEmpty()) {
+                    list
+                } else {
+                    val results = ArrayList<Timeline>()
+                    list?.forEach {
+                        if (it.date?.contains(charSearch, ignoreCase = true) == true) {
+                            results.add(it)
+                        }
+                    }
+                    results
+                }
+                val filterResults = FilterResults()
+                filterResults.values = filterData
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filterData = results?.values as ArrayList<Timeline> /* = java.util.ArrayList<com.example.covid19.CountryStatistic.Timeline> */
+                notifyDataSetChanged()
+            }
+        }
     }
 }

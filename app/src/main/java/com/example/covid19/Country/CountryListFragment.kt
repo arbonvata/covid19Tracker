@@ -1,7 +1,6 @@
 package com.example.covid19.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,8 +69,6 @@ class CountryListFragment : Fragment() {
             recycleView.apply {
                 addItemDecoration(DefaultItemDecorator(12, 62))
                 adapter = recyclerViewAdapter
-
-
             }
         }
     }
