@@ -24,9 +24,8 @@ class StatisticChartFragment : Fragment() {
         return inflater.inflate(R.layout.statistic_chart_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(StatisticChartViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 }

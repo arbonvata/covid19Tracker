@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_go_to_summary_fragment"
             app:destination="@+id/summaryFragment" />
+        <action
+            android:id="@+id/action_go_to_graph_fragment"
+            app:destination="@+id/graphFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -40,6 +43,15 @@
             android:name="countryId"
             app:argType="string" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.example.covid19.countryStatistic.Chart.StatisticChartFragment"
+        android:label="Statistic for each country"
+        tools:layout="@layout/statistic_chart_fragment">
+        <argument
+            android:name="countryId"
+            app:argType="string" />
     </fragment>
 
 </navigation>
