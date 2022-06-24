@@ -22,12 +22,16 @@ class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData)
         private var confirmedTextView: TextView? = null
         private var deathsTextView: TextView? = null
         private var newRecoveredTextView: TextView? = null
+        private var deathsTodayTextView: TextView? = null
+        private var activeCasesTextView: TextView? = null
 
         init {
             dateTextView = itemView.findViewById(R.id.dateView)
             confirmedTextView = itemView.findViewById(R.id.confirmedView)
             deathsTextView = itemView.findViewById(R.id.death)
             newRecoveredTextView = itemView.findViewById(R.id.newRecovered)
+            deathsTodayTextView = itemView.findViewById(R.id.deathsToday)
+            activeCasesTextView = itemView.findViewById(R.id.activeToday)
         }
 
         fun bind(countryStatistic: Timeline) {
@@ -35,6 +39,8 @@ class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData)
             confirmedTextView?.text = "Confirmed ${countryStatistic.confirmed}"
             deathsTextView?.text = "Deaths ${countryStatistic.deaths}"
             newRecoveredTextView?.text = "New recovered: ${countryStatistic.newConfirmed}"
+            deathsTodayTextView?.text = "Deaths today " + countryStatistic.newDeaths
+            activeCasesTextView?.text = "Active today " + countryStatistic.active
         }
     }
 
