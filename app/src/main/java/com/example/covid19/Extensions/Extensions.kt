@@ -13,6 +13,5 @@ fun Long.dateFromLong(): String {
     val date = Date(this * 1)
     val format = SimpleDateFormat("yyyy-MM-dd")
     val datum = format.format(date)
-
     return datum
 }

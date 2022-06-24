@@ -33,8 +33,8 @@ class CountrySummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CountryStatisticViewModel::class.java)
-        viewModel.getCountryStatistic(countryId = countryCode)
-        activity?.title = countryCode.uppercase()
+        viewModel.getCountryStatistic(countryId = args.countryId)
+        activity?.title = args.countryName
         observeLiveData()
         // TODO: Use the ViewModel
     }

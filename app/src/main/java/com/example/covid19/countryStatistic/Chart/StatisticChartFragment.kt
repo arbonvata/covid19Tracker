@@ -2,7 +2,6 @@ package com.example.covid19.countryStatistic.Chart
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +23,11 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.EntryXComparator
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Collections
+import java.util.Date
 import kotlin.collections.ArrayList
 
 class StatisticChartFragment : Fragment() {
-    private lateinit var countryId: String
     private val args by navArgs<StatisticChartFragmentArgs>()
     private val viewModel: CountryStatisticViewModel by viewModels()
     private lateinit var bindining: StatisticChartFragmentBinding
@@ -52,7 +51,7 @@ class StatisticChartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        countryId = args.countryId
+        activity?.title = args.countryName
         setupGraph()
         viewModel.countryStatisticData.observe(viewLifecycleOwner) {
             renderData(it)
@@ -61,7 +60,7 @@ class StatisticChartFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.getCountryStatistic(countryId)
+        viewModel.getCountryStatistic(args.countryId)
     }
 
     private fun renderData(statisticData: CountryStatisticData?) {
@@ -179,7 +178,6 @@ class StatisticChartFragment : Fragment() {
             val date = Date(value.toLong())
             val format = SimpleDateFormat("yyyy-MM-dd")
             val datum = format.format(date)
-            Log.d("Arbon", "Datum " + datum)
             return datum
         }
     }

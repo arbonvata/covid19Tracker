@@ -22,7 +22,6 @@ import com.example.covid19.recycleViews.DefaultItemDecorator
  * create an instance of this fragment.
  */
 class CountryStatisticFragment : Fragment() {
-    private lateinit var countryCode: String
     private lateinit var recycleView: RecyclerView
     private lateinit var countryStatisticViewModel: CountryStatisticViewModel
     private val args: CountryStatisticFragmentArgs by navArgs()
@@ -31,8 +30,7 @@ class CountryStatisticFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        countryCode = args.countryId
-        activity?.title = countryCode.uppercase()
+        activity?.title = args.countryName
     }
 
     override fun onCreateView(
@@ -86,7 +84,7 @@ class CountryStatisticFragment : Fragment() {
     private fun initiateViewModel() {
         countryStatisticViewModel =
             ViewModelProvider(requireActivity()).get(CountryStatisticViewModel::class.java)
-        countryStatisticViewModel.getCountryStatistic(countryCode)
+        countryStatisticViewModel.getCountryStatistic(args.countryId)
     }
 
     private fun populateRecycleView(listWithCountryStatistic: CountryStatisticData) {

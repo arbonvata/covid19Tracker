@@ -16,7 +16,7 @@ import com.example.covid19.country.CountryRecycleViewAdapter.CountryViewHolder
 
 class CountryRecycleViewAdapter(
     private val countryList: ArrayList<Country>,
-    private val callBack: (String) -> Unit
+    private val callBack: (country: Country) -> Unit
 ) : RecyclerView.Adapter<CountryViewHolder>(), Filterable {
 
     var countryFilterList = countryList
@@ -26,7 +26,6 @@ class CountryRecycleViewAdapter(
         OnClickListener {
         var context: Context = parent.context
         private var countryNameTv: TextView = itemView.findViewById(R.id.countryName)
-        private var sluggCodeTv: TextView = itemView.findViewById(R.id.countrySluggCodeTv)
         private var flagIcon: ImageView = itemView.findViewById(R.id.flag)
 
         init {
@@ -35,17 +34,16 @@ class CountryRecycleViewAdapter(
 
         fun bind(country: Country) {
             countryNameTv.text = country.Country
-            sluggCodeTv.text = country.Slug
             var url = "https://flagcdn.com/72x54/${country.ISO2.lowercase()}.webp"
             // Todo: a better solution is to download all flags into a database and cache them
-            Glide.with(context).load(url).into(flagIcon)
+            Glide.with(context).load(url).centerCrop().into(flagIcon)
         }
 
         override fun onClick(v: View?) {
             val position: Int = bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val item = countryFilterList[position]
-                callBack(item.ISO2)
+                callBack(item)
             }
         }
     }

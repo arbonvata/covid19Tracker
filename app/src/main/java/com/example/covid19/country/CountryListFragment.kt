@@ -43,8 +43,8 @@ class CountryListFragment : Fragment() {
 
         countryViewModel = ViewModelProvider(requireActivity()).get(CountryViewModel::class.java)
         activity?.title = requireContext().resources.getString(R.string.list_with_countries)
-        registerSearchAction()
         registerObservers(view)
+        registerSearchAction()
         getPresentationMode()
         return view
     }
@@ -67,9 +67,8 @@ class CountryListFragment : Fragment() {
 
         countryViewModel.countriesData.observe(requireActivity()) {
             recyclerViewAdapter =
-                CountryRecycleViewAdapter(it as ArrayList<Country>) { countryCode: String ->
-                    // val directions = CountryListFragmentDirections.actionGoToStatisticFragment(countryCode)
-                    val action = getAction(countryCode)
+                CountryRecycleViewAdapter(it as ArrayList<Country>) { country: Country ->
+                    val action = getAction(country.ISO2, country.Country)
                     Navigation.findNavController(view).navigate(action)
                 }
 
@@ -93,19 +92,19 @@ class CountryListFragment : Fragment() {
         return mode
     }
 
-    private fun getAction(countryId: String): NavDirections {
+    private fun getAction(countryId: String, countryName: String): NavDirections {
         return when (mode) {
             PresentationMode.AS_TEXT -> {
-                CountryListFragmentDirections.actionGoToStatisticFragment(countryId)
+                CountryListFragmentDirections.actionGoToStatisticFragment(countryId, countryName)
             }
             PresentationMode.AS_SUMMARY -> {
-                CountryListFragmentDirections.actionGoToSummaryFragment(countryId)
+                CountryListFragmentDirections.actionGoToSummaryFragment(countryId, countryName)
             }
             PresentationMode.AS_GRAPH -> {
-                CountryListFragmentDirections.actionGoToGraphFragment(countryId)
+                CountryListFragmentDirections.actionGoToGraphFragment(countryId, countryName)
             }
             PresentationMode.NOT_VALID -> {
-                CountryListFragmentDirections.actionGoToStatisticFragment(countryId)
+                CountryListFragmentDirections.actionGoToStatisticFragment(countryId, countryName)
             }
         }
     }

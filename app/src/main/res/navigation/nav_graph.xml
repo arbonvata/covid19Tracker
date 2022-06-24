@@ -31,9 +31,15 @@
         tools:layout="@layout/fragment_country_statistic">
         <argument
             android:name="countryId"
-            app:argType="string" />
+            app:argType="string">
+        </argument>
 
+        <argument
+            android:name="countryName"
+            app:argType="string">
+        </argument>
     </fragment>
+
     <fragment
         android:id="@+id/summaryFragment"
         android:name="com.example.covid19.countrySummary.CountrySummaryFragment"
@@ -42,6 +48,11 @@
         <argument
             android:name="countryId"
             app:argType="string" />
+        <argument
+            android:name="countryName"
+            app:argType="string">
+
+        </argument>
 
     </fragment>
     <fragment
@@ -51,6 +62,9 @@
         tools:layout="@layout/statistic_chart_fragment">
         <argument
             android:name="countryId"
+            app:argType="string" />
+        <argument
+            android:name="countryName"
             app:argType="string" />
     </fragment>
 

@@ -1,36 +1,21 @@
 package com.example.covid19.countryStatistic
 
 import com.google.gson.annotations.SerializedName
-/*
-data class CountryStatisticData(
-    val ID: String,
-    val Country: String,
-    val CountryCode: String,
-    val Province: String,
-    val City: String,
-    val CityCode: String,
-    val Lat: Double,
-    val Lon: Double,
-    val Confirmed: Int,
-    val Cases: Int,
-    val Deaths: Int,
-    val Recovered: Int,
-    val Status: String,
-    val Date: Date,
 
-)
-*/
 data class CountryStatisticData(
     @SerializedName("data") var data: Data? = null,
     @SerializedName("_cacheHit") var CacheHit: Boolean? = null
 
 )
+/*
 data class Coordinates(
 
-    @SerializedName("latitude") var latitude: Double? = null,
+    //@SerializedName("latitude") var latitude: Double? = null,
     @SerializedName("longitude") var longitude: Double? = null
 
 )
+
+ */
 data class Today(
 
     @SerializedName("deaths") var deaths: Int? = null,
@@ -41,7 +26,7 @@ data class Calculated(
 
     @SerializedName("death_rate") var deathRate: Double? = null,
     @SerializedName("recovery_rate") var recoveryRate: Double? = null,
-    @SerializedName("recovered_vs_death_ratio") var recoveredVsDeathRatio: String? = null,
+    // @SerializedName("recovered_vs_death_ratio") var recoveredVsDeathRatio: String? = null,
     @SerializedName("cases_per_million_population") var casesPerMillionPopulation: Int? = null
 
 )
@@ -72,7 +57,7 @@ data class Timeline(
 
 data class Data(
 
-    @SerializedName("coordinates") var coordinates: Coordinates? = Coordinates(),
+    // @SerializedName("coordinates") var coordinates: Coordinates? = Coordinates(),
     @SerializedName("name") var name: String? = null,
     @SerializedName("code") var code: String? = null,
     @SerializedName("population") var population: Int? = null,
