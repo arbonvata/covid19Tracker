@@ -27,7 +27,7 @@ class CountryViewModel(application: Application) : AndroidViewModel(application)
                 _countriesData.value = countriesSorted.toList()
             } catch (e: Exception) {
                 // TODO: Handle it better :)
-                Toast.makeText(application.applicationContext, context.getString(R.string.no_internet), Toast.LENGTH_LONG).show()
+                Toast.makeText(application.applicationContext, context.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -13,7 +13,7 @@ import io.ktor.http.HttpMethod
 // see https://developer.android.com/training/basics/network-ops/connecting
 object Covid19ApiInterface {
 
-    private val client = HttpClient() {
+    private val client = HttpClient {
     }
     private val gson = Gson()
 
@@ -26,7 +26,10 @@ object Covid19ApiInterface {
     }
 
     suspend fun getCountryStatistic(countryId: String): CountryStatisticData {
-        // "https://api.covid19api.com/country/$countryId"
+        /* "https://api.covid19api.com/country/$countryId" is not updated as "https://corona-api.com/countries"
+         Use therefore "https://corona-api.com/countries for detailed statistics
+         */
+
         val response = client.request("https://corona-api.com/countries/$countryId") {
             method = HttpMethod.Get
         }

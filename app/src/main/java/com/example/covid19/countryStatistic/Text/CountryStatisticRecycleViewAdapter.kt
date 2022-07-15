@@ -10,7 +10,7 @@ import com.example.covid19.R
 import com.example.covid19.countryStatistic.CountryStatisticData
 import com.example.covid19.countryStatistic.Timeline
 
-class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData) :
+class CountryStatisticRecycleViewAdapter(data: CountryStatisticData) :
     RecyclerView.Adapter<CountryStatisticRecycleViewAdapter.CountryStatisticViewHolder>(), Filterable {
     private val list: ArrayList<Timeline>? = data.data?.timeline
     var filterData = list
@@ -85,7 +85,7 @@ class CountryStatisticRecycleViewAdapter(private val data: CountryStatisticData)
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filterData = results?.values as ArrayList<Timeline> /* = java.util.ArrayList<com.example.covid19.CountryStatistic.Timeline> */
+                filterData = results?.values as ArrayList<Timeline>
                 notifyDataSetChanged()
             }
         }

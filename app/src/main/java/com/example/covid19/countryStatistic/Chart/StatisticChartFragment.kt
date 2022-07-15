@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.covid19.Extensions.longFromStringDate
+import com.example.covid19.R
 import com.example.covid19.countryStatistic.CountryStatisticData
 import com.example.covid19.countryStatistic.CountryStatisticViewModel
 import com.example.covid19.countryStatistic.Timeline
@@ -110,33 +111,33 @@ class StatisticChartFragment : Fragment() {
     }
 
     private fun addDataSets() {
-        val lineDataSetActiveCases = LineDataSet(activeCases, "Active").apply {
+        val lineDataSetActiveCases = LineDataSet(activeCases, getString(R.string.active_cases)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.BLUE
             setDrawCircles(false)
         }
 
-        val lineDataSetDeaths = LineDataSet(deathCases, "Deaths").apply {
+        val lineDataSetDeaths = LineDataSet(deathCases, getString(R.string.deaths)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.RED
             setDrawCircles(false)
         }
-        val lineDataSetsRecovered = LineDataSet(recoveredCases, "Recovered").apply {
+        val lineDataSetsRecovered = LineDataSet(recoveredCases, getString(R.string.recovered)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.GREEN
             setDrawCircles(false)
         }
-        val lineDataSetsConfirmed = LineDataSet(recoveredCases, "Confirmed").apply {
+        val lineDataSetsConfirmed = LineDataSet(confirmedCases, getString(R.string.confirmed)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.YELLOW
             setDrawCircles(false)
         }
-        val lineDataSetsNewConfirmed = LineDataSet(recoveredCases, "New confirmed").apply {
+        val lineDataSetsNewConfirmed = LineDataSet(newConfirmedCases, getString(R.string.new_confirmed)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.CYAN
             setDrawCircles(false)
         }
-        val lineDataSetsNewRecovered = LineDataSet(recoveredCases, "Confirmed").apply {
+        val lineDataSetsNewRecovered = LineDataSet(newRecoveredCases, getString(R.string.new_recovered_cases)).apply {
             axisDependency = YAxis.AxisDependency.LEFT
             color = Color.BLACK
             setDrawCircles(false)

@@ -15,7 +15,6 @@ class CountryStatisticViewModel : ViewModel() {
     val countryStatisticData: LiveData<CountryStatisticData> = _countryStatisticData
 
     fun getCountryStatistic(countryId: String) {
-        // todo: Replace with async and await. More readable
         viewModelScope.launch {
             statisticData = countryStatisticList(countryId)
             val list = statisticData.data?.timeline

@@ -84,7 +84,7 @@ class CountryRecycleViewAdapter(
             }
 
             override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                countryFilterList = p1?.values as ArrayList<Country> /* = java.util.ArrayList<com.example.covid19.Country.Country> */
+                countryFilterList = p1?.values as ArrayList<Country>
                 notifyDataSetChanged()
             }
         }
